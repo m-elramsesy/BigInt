@@ -21,28 +21,48 @@ class BigInt {
 public:
     // Default constructor - initialize to zero
     BigInt() {
-        // TODO: Implement this constructor
+        number = "0";
+        isNegative = false;
     }
 
     // Constructor from 64-bit integer
     BigInt(int64_t value) {
-        // TODO: Implement this constructor
+        if(value <0){
+            isNegative = true;
+  // Convert negative value to string and remove '-'
+            number = to_string(value);
+            number = number.substr(1);
+            
+        }else{
+            isNegative = false;
+            number = to_string(value);
+
+        }
+        removeLeadingZeros();
     }
 
     // Constructor from string representation
     BigInt(const string& str) {
-        // TODO: Implement this constructor
+        if (!str.empty() && str[0] == '-') {
+            isNegative = true;
+            number = str.substr(1);
+        }
+        else {
+            isNegative = false;
+            number = str;
+        }
+
+        removeLeadingZeros();
     }
 
     // Copy constructor
     BigInt(const BigInt& other) {
-        // TODO: Implement this constructor
+        number = other.number;
+        isNegative = other.isNegative;
     }
 
     // Destructor
-    ~BigInt() {
-        // TODO: Implement if needed
-    }
+    ~BigInt() {}
 
     // Assignment operator
     BigInt& operator=(const BigInt& other) {
